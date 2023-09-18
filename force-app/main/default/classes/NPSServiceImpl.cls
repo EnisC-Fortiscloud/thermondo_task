@@ -1,6 +1,6 @@
 public class NPSServiceImpl implements NPSService {
 
-    // Get the NPS API endpoint, username and password from custom metadata NPS__mdt
+    // Get the NPS API endpoint, username and password from custom metadata NPS__mdt (not best practice to store credentials -> optional custom header with named credential)
     private static String NPS_API_ENDPOINT = NPS__mdt.getInstance('Orders').Endpoint__c;
     private static String USERNAME = NPS__mdt.getInstance('Orders').Username__c;
     private static String PASSWORD = NPS__mdt.getInstance('Orders').Password__c;
@@ -18,7 +18,7 @@ public class NPSServiceImpl implements NPSService {
         request.setHeader('Authorization', 'Basic ' + createBasicAuthHeader(USERNAME, PASSWORD));
         request.setBody(JSON.serialize(orderPayloads));
 
-        // Perform the HTTP callout
+        // Perform the HTTP callout --> error handling recommanded here but currently not included
         HttpResponse response = new Http().send(request);
 
         // If successful, update orders checkbox SentToNPSService__c to true

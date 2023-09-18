@@ -1,4 +1,9 @@
 public class NPSInvocable {
+    /**
+     * LIMITATIONS: the logic can handle up to 3000 Orders. After that we exceed the callout request limit of 100. 
+     * To solve this a Queueable class could be used.
+     * The timeout limit is not considered in the current logic. 
+     */
 
     @InvocableMethod(label='Send NPS Survey')
     public static void sendNPS(List<List<Id>> orderIds) {
